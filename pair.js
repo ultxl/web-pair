@@ -1,4 +1,4 @@
-const { malvinid } = require('./id'); 
+const { malvinid } = require('./gen-id'); 
 const express = require('express');
 const fs = require('fs');
 let router = express.Router();
