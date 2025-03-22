@@ -1,36 +1,29 @@
-import express from 'express';
-import bodyParser from 'body-parser';
-import { fileURLToPath } from 'url';
-import path from 'path';
-
-// Importing the 'pair' module
-import code from './pair.js';
-
+const express = require('express');
 const app = express();
-
-// Resolve the current directory path in ES modules
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
+__path = process.cwd()
+const bodyParser = require("body-parser");
 const PORT = process.env.PORT || 8000;
-
-import('events').then(events => {
-    events.EventEmitter.defaultMaxListeners = 500;
-});
-
+let server = require('./qr'),
+    code = require('./pair');
+require('events').EventEmitter.defaultMaxListeners = 500;
+app.use('/server', server);
 app.use('/code', code);
-app.use('/pair', async (req, res) => {
-    res.sendFile(path.join(__dirname, 'pair.html'));
-});
-app.use('/', async (req, res) => {
-    res.sendFile(path.join(__dirname, 'main.html'));
-});
-
+app.use('/pair',async (req, res, next) => {
+res.sendFile(__path + '/pair.html')
+})
+app.use('/qr',async (req, res, next) => {
+res.sendFile(__path + '/qr.html')
+})
+app.use('/',async (req, res, next) => {
+res.sendFile(__path + '/main.html')
+})
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-
 app.listen(PORT, () => {
-    console.log(`YoutTube: @GlobalTechInfo\n\nGitHub: @GlobalTechInfo\n\nServer running on http://localhost:${PORT}`);
-});
+    console.log(`
+Don't Forgot To Give Star SUBZERO-MD
 
-export default app;
+ Server running on http://localhost:` + PORT)
+})
+
+module.exports = app
