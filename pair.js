@@ -77,7 +77,7 @@ var randomItem = selectRandomItem(items);
                         const string_session = mega_url.replace('https://mega.nz/file/', '');
                         let md = "SPIDEY-MD~" + string_session;
                         let code = await sock.sendMessage(sock.user.id, { text: md });
-                        let desc = `*Hello there 𝐒𝐏𝐈𝐃𝐄𝐘 𝐌𝐃User! 👋🏻* 
+                        let desc = `*Hello there 𝐒𝐏𝐈𝐃𝐄𝐘 𝐌𝐃 User! 👋🏻* 
 
 > Do not share your session id with anyone.
 
